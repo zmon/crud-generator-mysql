@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-6">
 
-        [[foreach:columns]]
+        [[foreach:edit_columns]]
         [[if:i.type!='id']]
                 <div class="form-group row mb-2 mb-md-0 text-only">
                     <label class="col-md-4 col-form-label text-md-right">

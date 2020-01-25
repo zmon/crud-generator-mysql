@@ -4,7 +4,7 @@
         <div v-if="server_message !== false" class="alert alert-danger" role="alert">
             {{ this.server_message}}  <a v-if="try_logging_in" href="/login">Login</a>
         </div>
-[[foreach:columns]]
+[[foreach:edit_columns]]
 
         [[if:i.name=='name']]
             <div class="row">
