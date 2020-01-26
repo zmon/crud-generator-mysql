@@ -325,12 +325,11 @@ class CrudGeneratorService
             $field = isset($c->Field) ? $c->Field : $c->field;
             $type = isset($c->Type) ? $c->Type : $c->type;
             $null = isset($c->Null) ? $c->Null : $c->null;
-
-            $key = isset($c->Key) ? $c->Key : isset($c->key) ? $c->key : '';
+            $key = isset($c->Key) ? $c->Key : $c->key;
+            $default = $c->Default;
 
             $primary_key = ($key = 'PRI' ? true : false);
 
-            $default = isset($c->Default) ? $c->Default : isset($c->default) ? $c->default : '';
 
             if ($x = preg_match("/\((\d+)\)/", $type, $out)) {
                 $size = (int)$out[1];
