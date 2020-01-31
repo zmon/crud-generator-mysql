@@ -196,34 +196,34 @@ class CrudGeneratorService
             // ### IMPORT FROM PRODUCTION
 
             $addimport = "//        \$$modelname = new \\App\\Lib\\Import\\Import$modelname();";
-            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportProduction.php', "\n\n" . $addimport, 0, true);
+            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportCms.php', "\n\n" . $addimport, 0, true);
 
             $addimport = "//        \$" . $modelname . "->import('proddb', '" . $this->tableName . "');";
-            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportProduction.php', "\n" . $addimport, 0, true);
+            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportCms.php', "\n" . $addimport, 0, true);
 
 
-            // ### Premissions
+            // ### Premissions - Now in documentation file in Doc/CRUD
 
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName . " index');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " view');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " export-pdf');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " export-excel');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " add');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " edit');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
-
-            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " delete');";
-            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName . " index');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " view');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " export-pdf');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " export-excel');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " add');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " edit');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
+//
+//            $permission = "//        Permission::findOrCreate('" . $this->viewFolderName  . " delete');";
+//            $this->appendToEndOfFile(base_path() . '/app/Lib/InitialPermissions.php', "\n" . $permission, 0, true);
 
 
             // ### VUE JS ###
@@ -322,13 +322,18 @@ class CrudGeneratorService
 
         $ret = [];
         foreach ($cols as $c) {
+
+
             $field = isset($c->Field) ? $c->Field : $c->field;
             $type = isset($c->Type) ? $c->Type : $c->type;
             $null = isset($c->Null) ? $c->Null : $c->null;
             $key = isset($c->Key) ? $c->Key : $c->key;
             $default = $c->Default;
 
+
+
             $primary_key = ($key = 'PRI' ? true : false);
+
 
 
             if ($x = preg_match("/\((\d+)\)/", $type, $out)) {

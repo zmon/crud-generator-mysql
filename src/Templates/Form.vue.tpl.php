@@ -41,8 +41,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary" :disabled="processing">
-                        <span v-if="this.form_data.id">Change [[model_singular]]</span>
-                        <span v-else="this.form_data.id">Add [[model_singular]]</span>
+                        <span v-if="this.form_data.id">Change [[display_name_singular]]</span>
+                        <span v-else="this.form_data.id">Add [[display_name_singular]]</span>
                     </button>
                 </div>
                 <div class="col-md-6 text-md-right mt-2 mt-md-0">

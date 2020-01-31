@@ -21,49 +21,6 @@ use Maatwebsite\Excel\Facades\Excel;
 class [[model_uc]]Controller extends Controller
 {
 
-    /**
-     * Examples
-     *
-     * Vue component example.
-     *
-        <ui-select-pick-one
-            url="/api-[[view_folder]]/options"
-            v-model="[[model_singular]]Selected"
-            :selected_id=[[model_singular]]Selected"
-            name="[[model_singular]]">
-        </ui-select-pick-one>
-     *
-     *
-     * Blade component example.
-     *
-     *   In Controler
-     *
-             $[[model_singular]]_options = \App\[[model_uc]]::getOptions();
-
-
-     *
-     *   In View
-
-            @component('../components/select-pick-one', [
-                'fld' => '[[model_singular]]_id',
-                'selected_id' => $RECORD->[[model_singular]]_id,
-                'first_option' => 'Select a [[model_uc_plural]]',
-                'options' => $[[model_singular]]_options
-            ])
-            @endcomponent
-     *
-     * Permissions
-     *
-
-             Permission::findOrCreate('[[model_singular]] index');
-             Permission::findOrCreate('[[model_singular]] view');
-             Permission::findOrCreate('[[model_singular]] export-pdf');
-             Permission::findOrCreate('[[model_singular]] export-excel');
-             Permission::findOrCreate('[[model_singular]] add');
-             Permission::findOrCreate('[[model_singular]] edit');
-             Permission::findOrCreate('[[model_singular]] delete');
-
-    */
 
 
     /**
@@ -75,7 +32,7 @@ class [[model_uc]]Controller extends Controller
     {
 
         if (!Auth::user()->can('[[model_singular]] index')) {
-            \Session::flash('flash_error_message', 'You do not have access to [[display_name_singular]]s.');
+            \Session::flash('flash_error_message', 'You do not have access to [[display_name_singular]].');
             return Redirect::route('home');
         }
 
