@@ -15,7 +15,7 @@ git push --tags
 ### Install or Update projects
 
 ```
-composer require --dev zmon/laravel-crud-generator-zmon
+composer require --dev zmon/crud-generator-mysql
 ```
 
 Then add to service provider
