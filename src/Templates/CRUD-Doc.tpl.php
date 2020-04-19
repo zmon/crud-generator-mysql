@@ -94,8 +94,8 @@ Route::resource('/[[view_folder]]', '[[controller_name]]Controller');
 
 ```
 @can(['[[model_singular]] index'])
-<li class="nav-item @php if(isset($nav_path[0]) && $nav_path[0] == '[[model_singular]]') echo 'active' @endphp">
-    <a class="nav-link" href="{{ route('[[model_singular]].index') }}">[[display_name_singular]] <span
+<li class="nav-item @php if(isset($nav_path[0]) && $nav_path[0] == '[[view_folder]]') echo 'active' @endphp">
+    <a class="nav-link" href="{{ route('[[view_folder]].index') }}">[[display_name_singular]] <span
             class="sr-only">(current)</span></a>
 </li>
 @endcan
@@ -105,8 +105,8 @@ Route::resource('/[[view_folder]]', '[[controller_name]]Controller');
 
 ```
 @can(['[[model_singular]] index'])
-<a class="dropdown-item @php if(isset($nav_path[1]) && $nav_path[1] == '[[model_singular]]') echo 'active' @endphp"
-   href="/[[model_singular]]">[[display_name_singular]]</a>
+<a class="dropdown-item @php if(isset($nav_path[1]) && $nav_path[1] == '[[view_folder]]') echo 'active' @endphp"
+   href="/[[view_folder]]">[[display_name_singular]]</a>
 @endcan
 ```
 
