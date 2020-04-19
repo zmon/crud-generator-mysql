@@ -3,14 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\HistoryTrait;
 use App\Traits\RecordSignature;
 
 class [[model_uc]] extends Model
 {
 
-    use SoftDeletes;
+//    use SoftDeletes;
     use RecordSignature;
+    use HistoryTrait;
 
     /**
      * fillable - attributes that can be mass-assigned

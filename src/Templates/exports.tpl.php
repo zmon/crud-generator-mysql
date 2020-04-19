@@ -7,6 +7,10 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
+/**
+ * Class [[model_uc]]Export - Export to Excel Spreadsheet
+ * @package App\Exports
+ */
 class [[model_uc]]Export implements FromQuery, WithHeadings, WithMapping
 {
     use Exportable;

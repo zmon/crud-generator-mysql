@@ -196,10 +196,10 @@ class CrudGeneratorService
             // ### IMPORT FROM PRODUCTION
 
             $addimport = "//        \$$modelname = new \\App\\Lib\\Import\\Import$modelname();";
-            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportCms.php', "\n\n" . $addimport, 0, true);
+            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportProduction.php', "\n\n" . $addimport, 0, true);
 
             $addimport = "//        \$" . $modelname . "->import('proddb', '" . $this->tableName . "');";
-            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportCms.php', "\n" . $addimport, 0, true);
+            $this->appendToEndOfFile(base_path() . '/app/Console/Commands/ImportProduction.php', "\n" . $addimport, 0, true);
 
 
             // ### Premissions - Now in documentation file in Doc/CRUD
@@ -234,60 +234,60 @@ class CrudGeneratorService
 //        $addvue = "//Vue.component('" . $this->viewFolderName . "-form',       require('./components/" . $modelname . "Form.vue'));    // May need to add .default);";
 //        $this->appendToEndOfFile(base_path().'/resources/js/components.js', "\n".$addvue, 0, true);
 
-            $addvue = "// Vue.component('" . $this->viewFolderName . "-grid', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-grid\" */ './components/" . $this->tableName . '/' . $modelname . "Grid.vue'));";
-            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n\n" . $addvue, 0, true);
-
-            $addvue = "// Vue.component('" . $this->viewFolderName . "-form', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-form\" */ './components/" . $this->tableName . '/' . $modelname . "Form.vue'));";
-            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n" . $addvue, 0, true);
-
-            $addvue = "// Vue.component('" . $this->viewFolderName . "-show', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-Show\" */ './components/" . $this->tableName . '/' . $modelname . "Show.vue'));";
-            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n" . $addvue, 0, true);
-
-
-            $this->output->info('Adding Vue: ' . $addvue);
+//            $addvue = "// Vue.component('" . $this->viewFolderName . "-grid', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-grid\" */ './components/" . $this->tableName . '/' . $modelname . "Grid.vue'));";
+//            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n\n" . $addvue, 0, true);
+//
+//            $addvue = "// Vue.component('" . $this->viewFolderName . "-form', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-form\" */ './components/" . $this->tableName . '/' . $modelname . "Form.vue'));";
+//            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n" . $addvue, 0, true);
+//
+//            $addvue = "// Vue.component('" . $this->viewFolderName . "-show', () => import(/* webpackChunkName:\"" . $this->viewFolderName . "-Show\" */ './components/" . $this->tableName . '/' . $modelname . "Show.vue'));";
+//            $this->appendToEndOfFile(base_path() . '/resources/js/components.js', "\n" . $addvue, 0, true);
+//
+//
+//            $this->output->info('Adding Vue: ' . $addvue);
 
             # $model_singular
 
 
-            // ### ROUTES ###
+//            // ### ROUTES ###
 
-            $addroute = '// Route::get(\'/api-' . $this->viewFolderName . '\', \'' . $this->controllerName . 'Api@index\');';
-            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
-            $this->output->info('Adding Route: ' . $addroute);
-
-            $addroute = '// Route::get(\'/api-' . $this->viewFolderName . '/options\', \'' . $this->controllerName . 'Api@getOptions\');';
-            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
-            $this->output->info('Adding Route: ' . $addroute);
-
-            $addroute = '// Route::get(\'/' . $this->viewFolderName . '/download\', \'' . $this->controllerName . 'Controller@download\')->name(\'' . $this->viewFolderName . '.download\');';
-            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
-            $this->output->info('Adding Route: ' . $addroute);
-
-            $addroute = '// Route::get(\'/' . $this->viewFolderName . '/print\', \'' . $this->controllerName . 'Controller@print\')->name(\'' . $this->viewFolderName . '.print\');';
-            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
-            $this->output->info('Adding Route: ' . $addroute);
-
-            $addroute = '// Route::resource(\'/' . $this->viewFolderName . '\', \'' . $this->controllerName . 'Controller\');';
-            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
-            $this->output->info('Adding Route: ' . $addroute);
+//            $addroute = '// Route::get(\'/api-' . $this->viewFolderName . '\', \'' . $this->controllerName . 'Api@index\');';
+//            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
+//            $this->output->info('Adding Route: ' . $addroute);
+//
+//            $addroute = '// Route::get(\'/api-' . $this->viewFolderName . '/options\', \'' . $this->controllerName . 'Api@getOptions\');';
+//            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
+//            $this->output->info('Adding Route: ' . $addroute);
+//
+//            $addroute = '// Route::get(\'/' . $this->viewFolderName . '/download\', \'' . $this->controllerName . 'Controller@download\')->name(\'' . $this->viewFolderName . '.download\');';
+//            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
+//            $this->output->info('Adding Route: ' . $addroute);
+//
+//            $addroute = '// Route::get(\'/' . $this->viewFolderName . '/print\', \'' . $this->controllerName . 'Controller@print\')->name(\'' . $this->viewFolderName . '.print\');';
+//            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
+//            $this->output->info('Adding Route: ' . $addroute);
+//
+//            $addroute = '// Route::resource(\'/' . $this->viewFolderName . '\', \'' . $this->controllerName . 'Controller\');';
+//            $this->appendToEndOfFile(base_path() . '/routes/web.php', "\n" . $addroute, 0, true);
+//            $this->output->info('Adding Route: ' . $addroute);
 
 
 
             # clean code
 
-            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Grid.vue";
-            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n\n" . $text, 0, true);
-            $this->output->info('Adding CleanCode: ' . $text);
-
-
-            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Form.vue";
-            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n" . $text, 0, true);
-            $this->output->info('Adding CleanCode: ' . $text);
-
-
-            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Show.vue";
-            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n" . $text, 0, true);
-            $this->output->info('Adding CleanCode: ' . $text);
+//            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Grid.vue";
+//            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n\n" . $text, 0, true);
+//            $this->output->info('Adding CleanCode: ' . $text);
+//
+//
+//            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Form.vue";
+//            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n" . $text, 0, true);
+//            $this->output->info('Adding CleanCode: ' . $text);
+//
+//
+//            $text = "prettier --write resources/js/components/" . $this->tableName. "/${modelname}Show.vue";
+//            $this->appendToEndOfFile(base_path() . '/bin/clean-code.sh', "\n" . $text, 0, true);
+//            $this->output->info('Adding CleanCode: ' . $text);
 
 
         }

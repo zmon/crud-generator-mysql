@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.crud-master')
 @php $nav_path = ['[[route_path]]']; @endphp
 @section('page-title')
     Edit {{$[[model_singular]]->name}}

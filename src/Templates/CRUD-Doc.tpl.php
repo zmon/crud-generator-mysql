@@ -1,5 +1,22 @@
 # [[model_uc]] - `[[model_plural]]`
 
+## To create or replace missing CRUD
+
+```
+php artisan make:crud [[model_plural]]  --display-name="[[model_uc_plural]]" --grid-columns="name"   # --force --skip-append
+```
+
+You will want to adjust the grid-columns to add more columns  for example to add alias
+
+```
+--grid-columns="name:alias"
+```
+
+To replace one file, remove it and rerun the above command
+
+To replace all files, uncomment `--force`
+
+
 ## After running Crud Generator
 
 
@@ -39,26 +56,36 @@ From the bottom of the file, add these to read-only
 Then run the following to install the permissions
 
 ```
-php artisan lbv:set-initial-permissions
+php artisan app:set-initial-permissions
 ```
 
 ### Components
 
 In `resource/js/components`
 
-Remove
-
-```
-Vue.component('[[model_singular]]', require('./components/[[model_singular]].vue').default);
-```
 
 Add
 
 ```
-Vue.component('[[view_folder]]', () => import(/* webpackChunkName:"[[view_folder]]" */ './components/[[tablename]]/[[view_folder]].vue'));
-Vue.component('[[view_folder]]', () => import(/* webpackChunkName:"[[view_folder]]" */ './components/[[tablename]]/[[view_folder]].vue'));
-Vue.component('[[view_folder]]', () => import(/* webpackChunkName:"[[view_folder]]" */ './components/[[tablename]]/[[view_folder]].vue'));
+Vue.component('[[view_folder]]-grid', () => import(/* webpackChunkName:"[[view_folder]]-grid" */ './components/[[tablename]]/[[model_uc]]Grid.vue'));
+Vue.component('[[view_folder]]-form', () => import(/* webpackChunkName:"[[view_folder]]-form" */ './components/[[tablename]]/[[model_uc]]Form.vue'));
+Vue.component('[[view_folder]]-show', () => import(/* webpackChunkName:"[[view_folder]]-show" */ './components/[[tablename]]/[[model_uc]]Show.vue'));
 
+```
+
+### Routes
+
+In `routes/web.php
+
+
+Add
+
+```
+Route::get('/api-[[view_folder]]', '[[controller_name]]Api@index');
+Route::get('/api-[[view_folder]]/options', '[[controller_name]]Api@getOptions');
+Route::get('/[[view_folder]]/download', '[[controller_name]]Controller@download')->name('[[view_folder]].download');
+Route::get('/[[view_folder]]/print', '[[controller_name]]Controller@print')->name('[[view_folder]].print');
+Route::resource('/[[view_folder]]', '[[controller_name]]Controller');
 ```
 
 #### Add to the menu in `resources/views/layouts/crud-nav.blade.php`
@@ -83,40 +110,10 @@ Vue.component('[[view_folder]]', () => import(/* webpackChunkName:"[[view_folder
 @endcan
 ```
 
-#### Remove dead code
 
-```
-rm app/Queries/GridQueries/[[controller_name]]Query.php
-rm resources/js/components/[[controller_name]]Grid.vue
-```
 
-###
+## Code Cleanup
 
-Remove from routes
-
-```
-Route::get('api/owner-all', '\\App\Queries\GridQueries\OwnerQuery@getAllForSelect');
-Route::get('api/owner-one', '\\App\Queries\GridQueries\OwnerQuery@selectOne');
-```
-
-vi app/Http/Controllers/ApiController.php
-
-Remove the Grid Method
-
-```
-// Begin Owner Api Data Grid Method
-
-public function ownerData(Request $request)
-{
-
-return GridQuery::sendData($request, 'OwnerQuery');
-
-}
-
-// End Owner Api Data Grid Method
-```
-
-#### Code Cleanup
 
 ```
 app/Exports/[[controller_name]]Export.php
@@ -138,14 +135,45 @@ node_modules/.bin/prettier --write resources/js/components/[[tablename]]/" . [[m
 
 
 
-## Vue component example.
+## FORM Vue component example.
 ```
-<ui-select-pick-one
-    url="/api-[[view_folder]]/options"
-    v-model="[[model_singular]]Selected"
-    :selected_id=[[model_singular]]Selected"
-    name="[[model_singular]]">
-</ui-select-pick-one>
+<std-form-group
+    label="[[model_uc]]"
+    label-for="[[model_singular]]_id"
+    :errors="form_errors.[[model_singular]]_id">
+    <ui-select-pick-one
+        url="/api-[[view_folder]]/options"
+        v-model="form_data.[[model_singular]]_id"
+        :selected_id="form_data.[[model_singular]]_id"
+        name="[[model_singular]]_id"
+        :blank_value="0">
+    </ui-select-pick-one>
+</std-form-group>
+
+
+import UiSelectPickOne from "../SS/UiSelectPickOne";
+
+components: { UiSelectPickOne },
+```
+
+## GRID Vue Component example
+
+```
+<search-form-group
+    class="mb-0"
+    label="[[model_uc]]"
+    label-for="[[model_singular]]_id"
+    :errors="form_errors.[[model_singular]]_id">
+    <ui-select-pick-one
+        url="/api-[[view_folder]]/options"
+        v-model="form_data.[[model_singular]]_id"
+        :selected_id="form_data.[[model_singular]]_id"
+        name="[[model_singular]]_id"
+        blank_text="-- Select One --"
+        blank_value="0"
+        additional_classes="mb-2 grid-filter">
+    </ui-select-pick-one>
+</search-form-group>
 ```
 ## Blade component example.
 
@@ -168,3 +196,46 @@ $[[model_singular]]_options = \App\[[model_uc]]::getOptions();
 @endcomponent
 ```
 
+## Old Stuff that can be ignored
+
+#### Components
+ 
+ In `resource/js/components`
+ 
+Remove
+
+```
+Vue.component('[[model_singular]]', require('./components/[[model_singular]].vue').default);
+```
+
+#### Remove dead code
+
+```
+rm app/Queries/GridQueries/[[controller_name]]Query.php
+rm resources/js/components/[[controller_name]]Grid.vue
+```
+
+
+#### Remove from routes
+
+```
+Route::get('api/owner-all', '\\App\Queries\GridQueries\OwnerQuery@getAllForSelect');
+Route::get('api/owner-one', '\\App\Queries\GridQueries\OwnerQuery@selectOne');
+```
+
+#### Remove the Grid Method
+vi app/Http/Controllers/ApiController.php
+
+
+```
+// Begin Owner Api Data Grid Method
+
+public function ownerData(Request $request)
+{
+
+return GridQuery::sendData($request, 'OwnerQuery');
+ 
+}
+ 
+// End Owner Api Data Grid Method
+```

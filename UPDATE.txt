@@ -2,7 +2,7 @@
 ### Determine new tag name and set it
 ```
 git tag -l
-git tag 1.4.3.0
+git tag 1.5.0.0
 ```
 
 ### Push changes up
@@ -26,5 +26,30 @@ config/app.php
          Illuminate\Validation\ValidationServiceProvider::class,
          Illuminate\View\ViewServiceProvider::class,
 -        CrudGenerator\CrudGeneratorServiceProvider::class,
+```
+
+```
+composer require zmon/crud-generator-mysql
+
+    "require-dev": {
+        .
+        .
+        .
+        .
+        "phpunit/phpunit": "^8.5",
+        "zmon/laravel-crud-generator-pgsql": "dev-master"
+    },
+    "repositories":[
+        {
+            "type": "vcs",
+            "url": "git@github.com:zmon/crud-generator-mysql.git"
+        }
+    ],
+```
+
+Create the following directories
+
+```
+mkdir -p Doc/CRUD app/Observers app/Lib/Import bin app/Exports
 ```
 
