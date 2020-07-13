@@ -1,4 +1,4 @@
-@extends('layouts.crud-master')
+@extends('layouts.master')
 @php $nav_path = ['[[route_path]]']; @endphp
 @section('page-title')
 View {{$[[model_singular]]->name}}
@@ -28,8 +28,8 @@ View {{$[[model_singular]]->name}}
                 <div class="col-md-4 text-md-center mt-2 mt-md-0">
                     @if ($can_delete)
                         <form class="form" role="form" method="POST" action="/[[route_path]]/{{ $[[model_singular]]->id }}">
-                            <input type="hidden" name="_method" value="delete">
-                            {{ csrf_field() }}
+                            @method('delete')
+                            @csrf
 
                             <input class="btn btn-danger" Onclick="return ConfirmDelete();" type="submit" value="Delete [[display_name_singular]]">
 

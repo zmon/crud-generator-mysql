@@ -1,4 +1,4 @@
-@extends('layouts.crud-master')
+@extends('layouts.master')
 @php $nav_path = ['[[route_path]]']; @endphp
 @section('page-title', '[[display_name_plural]]')
 @section('page-header-title', '[[display_name_plural]]')

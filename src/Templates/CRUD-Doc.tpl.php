@@ -2,6 +2,8 @@
 
 ## To create or replace missing CRUD
 
+Updated for Laravel 7
+
 ```
 php artisan make:crud [[model_plural]]  --display-name="[[model_uc_plural]]" --grid-columns="name"   # --force --skip-append
 ```

@@ -19,7 +19,6 @@ class [[model_uc]]Request extends FormRequest
         } else {  // If not we must be adding one
             return Auth::user()->can('[[model_singular]] add');
         }
-
     }
 
     /**
@@ -29,13 +28,11 @@ class [[model_uc]]Request extends FormRequest
      */
     public function rules()
     {
-
         $id = $this->route('[[model_singular]]');
 
         $rules = [
          //  Ignore duplicate email if it is this record
          //   'email' => 'required|string|email|unique:invites,email,' . $id . '|unique:users|max:191',
-
             'id' => 'numeric',
 [[foreach:columns]]
 [[if:i.name!='name']]

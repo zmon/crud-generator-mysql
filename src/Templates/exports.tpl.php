@@ -8,8 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 /**
- * Class [[model_uc]]Export - Export to Excel Spreadsheet
- * @package App\Exports
+ * Class [[model_uc]]Export - Export to Excel Spreadsheet.
  */
 class [[model_uc]]Export implements FromQuery, WithHeadings, WithMapping
 {
@@ -33,9 +32,9 @@ class [[model_uc]]Export implements FromQuery, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            [[foreach:columns]]
-            '[[i.name]]',
-            [[endforeach]]
+        [[foreach:columns]]
+        '[[i.name]]',
+        [[endforeach]]
         ];
     }
 
@@ -45,10 +44,9 @@ class [[model_uc]]Export implements FromQuery, WithHeadings, WithMapping
     public function map($[[model_singular]]): array
     {
         return [
-
-            [[foreach:columns]]
-            $[[model_singular]]->[[i.name]],
-            [[endforeach]]
+        [[foreach:columns]]
+        $[[model_singular]]->[[i.name]],
+        [[endforeach]]
         ];
     }
 }

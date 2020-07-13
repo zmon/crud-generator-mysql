@@ -2,20 +2,20 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HistoryTrait;
 use App\Traits\RecordSignature;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class [[model_uc]] extends Model
 {
-
 //    use SoftDeletes;
     use RecordSignature;
-    use HistoryTrait;
+//    use HistoryTrait;
 
     /**
-     * fillable - attributes that can be mass-assigned
+     * fillable - attributes that can be mass-assigned.
      */
     protected $fillable = [
     [[foreach:columns]]
@@ -34,15 +34,14 @@ class [[model_uc]] extends Model
 
     public function add($attributes)
     {
-
         try {
             $this->fill($attributes)->save();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             info(__METHOD__ . ' line: ' . __LINE__ . ':  ' . $e->getMessage());
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
         } catch (\Illuminate\Database\QueryException $e) {
             info(__METHOD__ . ' line: ' . __LINE__ . ':  ' . $e->getMessage());
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
 
         return true;
@@ -55,7 +54,7 @@ class [[model_uc]] extends Model
 
 
     /**
-     * Get Grid/index data PAGINATED
+     * Get Grid/index data PAGINATED.
      *
      * @param $per_page
      * @param $column
@@ -82,7 +81,7 @@ class [[model_uc]] extends Model
 
 
     /**
-     * Create base query to be used by Grid, Download, and PDF
+     * Create base query to be used by Grid, Download, and PDF.
      *
      * NOTE: to override the select you must supply all fields, ie you cannot add to the
      *       fields being selected.
@@ -113,7 +112,7 @@ class [[model_uc]] extends Model
                 break;
         }
 
-        $query = [[model_uc]]::select($columns)
+        $query = self::select($columns)
         ->orderBy($column, $direction);
 
         if ($keyword) {
@@ -123,7 +122,7 @@ class [[model_uc]] extends Model
     }
 
         /**
-         * Get export/Excel/download data query to send to Excel download library
+         * Get export/Excel/download data query to send to Excel download library.
          *
          * @param $per_page
          * @param $column

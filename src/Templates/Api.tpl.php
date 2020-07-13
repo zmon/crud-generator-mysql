@@ -2,10 +2,12 @@
 
 namespace [[appns]]Http\Controllers;
 
-use [[appns]][[model_uc]];
-use Illuminate\Http\Request;
 use [[appns]]Http\Controllers\Controller;
 use [[appns]]Http\Requests\[[model_uc]]IndexRequest;
+use [[appns]][[model_uc]];
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class [[model_uc]]Api extends Controller
 {
@@ -14,7 +16,7 @@ class [[model_uc]]Api extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index([[model_uc]]IndexRequest $request)
     {
@@ -31,7 +33,7 @@ class [[model_uc]]Api extends Controller
             '[[model_singular]]_page' => $page,
             '[[model_singular]]_column' => $column,
             '[[model_singular]]_direction' => $direction,
-            '[[model_singular]]_keyword' => $keyword
+            '[[model_singular]]_keyword' => $keyword,
         ]);
 
         $keyword = $keyword != 'null' ? $keyword : '';
@@ -41,10 +43,11 @@ class [[model_uc]]Api extends Controller
     }
 
     /**
-     * Returns "options" for HTML select
+     * Returns "options" for HTML select.
      * @return array
      */
-    public function getOptions() {
+    public function getOptions()
+    {
 
         return [[model_uc]]::getOptions();
     }
@@ -52,8 +55,8 @@ class [[model_uc]]Api extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -63,8 +66,8 @@ class [[model_uc]]Api extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int  $id
+     * @return Response
      */
     public function show($id)
     {
@@ -74,9 +77,9 @@ class [[model_uc]]Api extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request  $request
+     * @param int  $id
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -86,8 +89,8 @@ class [[model_uc]]Api extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int  $id
+     * @return Response
      */
     public function destroy($id)
     {

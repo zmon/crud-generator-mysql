@@ -1,4 +1,4 @@
-@extends('[[custom_master]]')
+@extends('layouts.master')
 
 @section('content')
 

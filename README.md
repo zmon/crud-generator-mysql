@@ -2,6 +2,7 @@
 
 # laravel-crud-generator
 
+Updated for Laravel 7
 
 php artisan command to generate fully working crud with grid paginated server side only by having database tables
 
